@@ -1,18 +1,24 @@
-name: GH200 GITHUB_TOKEN
+name: GH200 Permissions
 
 on:
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
-  token:
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: echo "Build"
+
+  deploy:
     runs-on: ubuntu-latest
 
     permissions:
-      contents: read
+      contents: write
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Test
-        run: echo "Token has contents:read"
+      - run: echo "Deploy"
