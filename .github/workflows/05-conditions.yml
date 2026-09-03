@@ -1,0 +1,41 @@
+name: GH200 Conditions
+
+on:
+  workflow_dispatch:
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Build
+        run: |
+          echo "Building..."
+          exit 1
+
+  normal:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Normal behavior
+        run: echo "I normally run"
+
+  failure-handler:
+    needs: build
+    if: ${{ failure() }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Handle failure
+        run: echo "Build failed — handling failure"
+
+  always-handler:
+    needs: build
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Always execute
+        run: echo "I run regardless of build result"
