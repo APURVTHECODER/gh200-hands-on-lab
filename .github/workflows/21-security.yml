@@ -1,20 +1,22 @@
-name: GH200 Security Lab
+name: GH200 Token Security
 
 on:
   pull_request:
   workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   security:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Show event
+      - name: Show token permissions
         run: |
           echo "Event = ${{ github.event_name }}"
           echo "Repository = ${{ github.repository }}"
-          echo "Actor = ${{ github.actor }}"
+          echo "Token exists = ${{ github.token != '' }}"
 
-      - name: Try secret
-        run: |
-          echo "Secret = ${{ secrets.DEMO_SECRET }}"
+      - name: Checkout
+        uses: actions/checkout@v4
