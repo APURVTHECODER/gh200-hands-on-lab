@@ -1,19 +1,23 @@
-name: GH200 Matrix
+name: GH200 Matrix Advanced
 
 on:
   workflow_dispatch:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
 
     strategy:
       matrix:
         node: [18, 20, 22]
         os: [ubuntu-latest, windows-latest]
 
+        exclude:
+          - os: windows-latest
+            node: 18
+
     steps:
-      - name: Show matrix values
+      - name: Show configuration
         run: |
           echo "OS = ${{ matrix.os }}"
           echo "Node = ${{ matrix.node }}"
