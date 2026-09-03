@@ -4,8 +4,11 @@ on:
   workflow_dispatch:
 
 jobs:
-
   call-build:
     uses: ./.github/workflows/reusable-build.yml
+
     with:
       version: "9.9.9"
+
+    secrets:
+      deploy_key: ${{ secrets.DEMO_SECRET }}
