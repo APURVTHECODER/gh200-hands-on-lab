@@ -16,7 +16,7 @@ jobs:
 
       - name: Show GitHub context
         run: |
-          echo "Repository: ${{ github.repository }}"
+          echo "Repository diff: $GITHUB_REPOSITORY"
           echo "Actor: ${{ github.actor }}"
           echo "Event: ${{ github.event_name }}"
           echo "Ref: ${{ github.ref }}"
