@@ -1,0 +1,35 @@
+name: GH200 Job Outputs
+
+on:
+  workflow_dispatch:
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+
+    outputs:
+      version: ${{ steps.info.outputs.version }}
+      status: ${{ steps.info.outputs.status }}
+
+    steps:
+      - name: Generate build information
+        id: info
+        run: |
+          echo "version=1.2.3" >> "$GITHUB_OUTPUT"
+          echo "status=SUCCESS" >> "$GITHUB_OUTPUT"
+
+      - name: Show step outputs
+        run: |
+          echo "Step version = ${{ steps.info.outputs.version }}"
+          echo "Step status = ${{ steps.info.outputs.status }}"
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Consume job outputs
+        run: |
+          echo "Received version = ${{ needs.build.outputs.version }}"
+          echo "Received status = ${{ needs.build.outputs.status }}"
