@@ -22,7 +22,8 @@ jobs:
       name: production
 
     steps:
+
       - name: Deploy
         run: |
           echo "Deploying to PRODUCTION"
-          echo "Deployment approved!"
+          echo "API key is available: ${{ secrets.PROD_API_KEY }}"
