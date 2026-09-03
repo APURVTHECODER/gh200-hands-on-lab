@@ -11,6 +11,7 @@ jobs:
 
     steps:
       - name: Expected failure
+        continue-on-error: true
         run: |
           echo "This step will fail"
           exit 1
