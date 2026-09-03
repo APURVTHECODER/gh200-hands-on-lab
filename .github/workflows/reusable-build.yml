@@ -1,0 +1,17 @@
+name: Reusable Build
+
+on:
+  workflow_call:
+    inputs:
+      version:
+        required: true
+        type: string
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Show version
+        run: |
+          echo "Building version ${{ inputs.version }}"
