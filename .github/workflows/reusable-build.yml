@@ -7,11 +7,19 @@ on:
         required: true
         type: string
 
+    secrets:
+      deploy_key:
+        required: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Show version
+      - name: Show inputs
         run: |
-          echo "Building version ${{ inputs.version }}"
+          echo "Version = ${{ inputs.version }}"
+
+      - name: Use secret
+        run: |
+          echo "Deploy key = ${{ secrets.deploy_key }}"
