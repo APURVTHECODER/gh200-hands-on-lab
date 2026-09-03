@@ -1,0 +1,15 @@
+name: GH200 Events
+
+on:
+  push:
+    branches:
+      - main
+      - "feature/**"
+    paths:
+      - "src/**"
+
+  pull_request:
+    branches:
+      - main
+
+  workflow_dispatch:
