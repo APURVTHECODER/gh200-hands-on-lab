@@ -1,0 +1,29 @@
+name: GH200 Variables Lab
+
+on:
+  workflow_dispatch:
+
+env:
+  APP_NAME: "GH200-LAB"
+  ENVIRONMENT: "training"
+
+jobs:
+  variables:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Show workflow variables
+        run: |
+          echo "APP_NAME = $APP_NAME"
+          echo "ENVIRONMENT = $ENVIRONMENT"
+
+      - name: Override variable
+        env:
+          ENVIRONMENT: "production"
+        run: |
+          echo "APP_NAME = $APP_NAME"
+          echo "ENVIRONMENT = $ENVIRONMENT"
+
+      - name: Back to workflow value
+        run: |
+          echo "ENVIRONMENT = $ENVIRONMENT"
