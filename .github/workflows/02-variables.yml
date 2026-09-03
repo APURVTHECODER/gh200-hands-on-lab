@@ -1,29 +1,27 @@
-name: GH200 Variables Lab
+name: GH200 Environment Files
 
 on:
   workflow_dispatch:
 
-env:
-  APP_NAME: "GH200-LAB"
-  ENVIRONMENT: "training"
-
 jobs:
-  variables:
+  env-demo:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Show workflow variables
+      - name: Create variables
         run: |
-          echo "APP_NAME = $APP_NAME"
-          echo "ENVIRONMENT = $ENVIRONMENT"
+          echo "BUILD_VERSION=2.5.0" >> "$GITHUB_ENV"
+          echo "DEPLOY_TARGET=staging" >> "$GITHUB_ENV"
 
-      - name: Override variable
-        env:
-          ENVIRONMENT: "production"
+      - name: Read variables
         run: |
-          echo "APP_NAME = $APP_NAME"
-          echo "ENVIRONMENT = $ENVIRONMENT"
+          echo "Version: $BUILD_VERSION"
+          echo "Target: $DEPLOY_TARGET"
 
-      - name: Back to workflow value
+      - name: Change target
         run: |
-          echo "ENVIRONMENT = $ENVIRONMENT"
+          echo "DEPLOY_TARGET=production" >> "$GITHUB_ENV"
+
+      - name: Read changed target
+        run: |
+          echo "Target: $DEPLOY_TARGET"
