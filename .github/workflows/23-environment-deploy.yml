@@ -1,4 +1,4 @@
-name: GH200 Environment Deploy
+name: GH200 Deployment Flow
 
 on:
   workflow_dispatch:
@@ -6,22 +6,33 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Build
         run: |
-          echo "Building application..."
-          echo "Build complete"
+          echo "Building..."
+          echo "Build successful"
 
-  deploy:
+  test:
     needs: build
     runs-on: ubuntu-latest
+    steps:
+      - name: Test
+        run: |
+          echo "Tests passed"
 
+  deploy:
+    needs: [build, test]
+    runs-on: ubuntu-latest
     environment:
       name: production
-
     steps:
       - name: Deploy
-        run: |
-          echo "Deploying version 1.0.0"
-          echo "API key = ${{ secrets.PROD_API_KEY }}"
+        run: echo "Deploying to production"
+
+  cleanup:
+    needs: [build, test, deploy]
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cleanup
+        run: echo "Cleanup runs regardless of previous result"
