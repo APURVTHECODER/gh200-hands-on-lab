@@ -1,0 +1,19 @@
+name: GH200 Concurrency
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: gh200-demo
+  cancel-in-progress: true
+
+jobs:
+  long-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Long running task
+        run: |
+          echo "Starting..."
+          sleep 90
+          echo "Finished"
