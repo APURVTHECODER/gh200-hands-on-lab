@@ -1,0 +1,27 @@
+name: GH200 Environment Deploy
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Build
+        run: |
+          echo "Building application..."
+          echo "Build complete"
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    environment:
+      name: production
+
+    steps:
+      - name: Deploy
+        run: |
+          echo "Deploying version 1.0.0"
+          echo "API key = ${{ secrets.PROD_API_KEY }}"
