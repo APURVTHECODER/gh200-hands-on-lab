@@ -10,10 +10,8 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+    permissions:
+      contents: write
 
-      - name: Show token
-        run: |
-          echo "Token exists = ${{ github.token != '' }}"
+    steps:
+      - uses: actions/checkout@v4
