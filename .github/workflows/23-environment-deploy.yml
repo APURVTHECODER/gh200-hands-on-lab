@@ -18,7 +18,8 @@ jobs:
     steps:
       - name: Test
         run: |
-          echo "Tests passed"
+          echo "Tests failed"
+          exit 1
 
   deploy:
     needs: [build, test]
