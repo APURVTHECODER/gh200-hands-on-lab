@@ -1,0 +1,19 @@
+name: GH200 Composite Action
+
+on:
+  workflow_dispatch:
+
+jobs:
+
+  demo:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Call our action
+        uses: ./.github/actions/hello
+        with:
+          name: Apurv
