@@ -13,3 +13,14 @@ on:
       - main
 
   workflow_dispatch:
+
+jobs:
+  long-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Long running task
+        run: |
+          echo "Starting..."
+          sleep 9
+          echo "Finished"
