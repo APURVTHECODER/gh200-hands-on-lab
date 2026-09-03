@@ -1,0 +1,20 @@
+name: GH200 Security Lab
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  security:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Show event
+        run: |
+          echo "Event = ${{ github.event_name }}"
+          echo "Repository = ${{ github.repository }}"
+          echo "Actor = ${{ github.actor }}"
+
+      - name: Try secret
+        run: |
+          echo "Secret = ${{ secrets.DEMO_SECRET }}"
