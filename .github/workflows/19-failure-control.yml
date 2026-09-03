@@ -1,4 +1,4 @@
-name: GH200 Failure Control
+name: GH200 Matrix Failure
 
 on:
   workflow_dispatch:
@@ -7,14 +7,22 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
-    continue-on-error: true
+
+    strategy:
+      fail-fast: true
+
+      matrix:
+        version: [18, 20, 22]
 
     steps:
-      - name: Expected failure
-        continue-on-error: true
-        run: |
-          echo "This step will fail"
-          exit 1
 
-      - name: Next step
-        run: echo "I still run"
+      - name: Test
+        run: |
+          echo "Testing Node ${{ matrix.version }}"
+
+          if [ "${{ matrix.version }}" = "20" ]; then
+            echo "Node 20 FAILED"
+            exit 1
+          fi
+
+          echo "Node ${{ matrix.version }} passed"
