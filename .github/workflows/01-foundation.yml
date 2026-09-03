@@ -11,6 +11,7 @@ jobs:
       - name: Show runner
         run: |
           echo "Hello from GitHub Actions"
+          echo "Runner OS diff: ${{runner.os}}"
           echo "Runner OS: $RUNNER_OS"
           echo "Runner arch: $RUNNER_ARCH"
 
