@@ -1,1 +1,16 @@
+name: GH200 Hello Action
+description: Simple composite action
 
+inputs:
+  name:
+    description: "Name to greet"
+    required: true
+
+runs:
+  using: composite
+
+  steps:
+    - name: Say hello
+      shell: bash
+      run: |
+        echo "Hello ${{ inputs.name }}"
