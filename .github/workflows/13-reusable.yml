@@ -1,0 +1,11 @@
+name: GH200 Reusable Workflow
+
+on:
+  workflow_dispatch:
+
+jobs:
+
+  call-build:
+    uses: ./.github/workflows/reusable-build.yml
+    with:
+      version: "2.5.0"
