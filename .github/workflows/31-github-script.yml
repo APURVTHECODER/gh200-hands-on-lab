@@ -1,0 +1,21 @@
+name: GH200 GitHub Script
+
+on:
+  workflow_dispatch:
+
+jobs:
+  script:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
+    steps:
+      - name: Run GitHub Script
+        uses: actions/github-script@v8
+        with:
+          script: |
+            console.log("Hello from GitHub Script!");
+            console.log("Repository:", context.repo.repo);
+            console.log("Owner:", context.repo.owner);
+            console.log("Event:", context.eventName);
