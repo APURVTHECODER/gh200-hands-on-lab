@@ -1,0 +1,6 @@
+name: Slow Docker Action
+description: Docker action built from Dockerfile
+
+runs:
+  using: docker
+  image: Dockerfile
