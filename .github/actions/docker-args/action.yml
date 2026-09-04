@@ -1,0 +1,9 @@
+name: Docker Args Demo
+description: GH-200 Docker action args demo
+
+runs:
+  using: docker
+  image: Dockerfile
+  args:
+    - "hello"
+    - "GH200"
