@@ -1,0 +1,6 @@
+name: Fast Docker Action
+description: Docker action using a pre-built image
+
+runs:
+  using: docker
+  image: docker://ghcr.io/OWNER/IMAGE:1.0
