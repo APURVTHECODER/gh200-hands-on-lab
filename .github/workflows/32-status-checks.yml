@@ -1,0 +1,64 @@
+name: GH200 Status Checks
+
+on:
+  workflow_dispatch:
+
+jobs:
+  normal:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Failing step
+        run: |
+          echo "NORMAL: This will fail"
+          exit 1
+
+      - name: Next step
+        run: |
+          echo "NORMAL: You should NOT see this"
+
+  continue-error:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Failing step
+        continue-on-error: true
+        run: |
+          echo "CONTINUE-ON-ERROR: This will fail"
+          exit 1
+
+      - name: Next step
+        run: |
+          echo "CONTINUE-ON-ERROR: I DO run"
+
+  failure-condition:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Failing step
+        run: |
+          echo "FAILURE: This will fail"
+          exit 1
+
+      - name: Normal next step
+        run: |
+          echo "FAILURE: You should NOT see this"
+
+      - name: Failure handler
+        if: ${{ failure() }}
+        run: |
+          echo "FAILURE: I run because a previous step failed"
+
+  always-condition:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Failing step
+        run: |
+          echo "ALWAYS: This will fail"
+          exit 1
+
+      - name: Normal next step
+        run: |
+          echo "ALWAYS: You should NOT see this"
+
+      - name: Always handler
+        if: ${{ always() }}
+        run: |
+          echo "ALWAYS: I run regardless of previous result"
