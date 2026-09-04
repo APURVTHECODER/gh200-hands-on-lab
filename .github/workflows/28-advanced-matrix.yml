@@ -1,0 +1,45 @@
+name: GH200 Advanced Matrix
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        version: [18, 20, 22]
+
+        exclude:
+          - os: windows-latest
+            version: 18
+
+        include:
+          - os: ubuntu-latest
+            version: 24
+            experimental: true
+
+    continue-on-error: ${{ matrix.experimental || false }}
+
+    steps:
+      - name: Show configuration
+        shell: bash
+        run: |
+          echo "OS = ${{ matrix.os }}"
+          echo "Version = ${{ matrix.version }}"
+          echo "Experimental = ${{ matrix.experimental || false }}"
+
+      - name: Test
+        shell: bash
+        run: |
+          if [ "${{ matrix.version }}" = "24" ]; then
+            echo "Experimental version failed"
+            exit 1
+          fi
+
+          echo "Tests passed"
